@@ -4,13 +4,13 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = "fluent-plugin-aes-forward"
-  spec.version       = "0.0.1"
-  spec.authors       = ["futoase"]
+  spec.version       = "0.0.2"
+  spec.authors       = ["Keiji Matsuzaki"]
   spec.email         = ["futoase@gmail.com"]
   spec.description   = %q{fluent plugin aes forward}
   spec.summary       = %q{This plugin is encrypt data at AES while transfer data.}
   spec.homepage      = "https://github.com/aiming/fluent-plugin-aes-forward"
-  spec.license       = "MIT"
+  spec.license       = "Apache License Version 2.0."
 
   spec.files         = `git ls-files`.split($/)
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
