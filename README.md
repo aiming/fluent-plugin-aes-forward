@@ -1,4 +1,4 @@
-# Fluent AES forward plugin
+# [Fluentd](http://fluentd.org) AES forward plugin
 
 - This plugin is encrypt data at AES while transfer data.
 
