@@ -1,4 +1,4 @@
-# [Fluentd](http://fluentd.org) AES forward plugin
+# [Fluentd](http://fluentd.org) AES forward plugin [![Build Status](https://travis-ci.org/aiming/fluent-plugin-aes-forward.png?branch=master)](https://travis-ci.org/aiming/fluent-plugin-aes-forward)
 
 - This plugin is encrypt data at AES while transfer data.
 
