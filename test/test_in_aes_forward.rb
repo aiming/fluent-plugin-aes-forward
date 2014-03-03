@@ -47,7 +47,7 @@ class InAESForwardTest < Test::Unit::TestCase
 
     d.run do
       d.expected_emits.each do |tag, time, record|
-        send_data [tag, 0, record].map { |x| encrypt_data(x) }.to_msgpack
+        send_data([tag, 0, record].map { |x| return encrypt_data(x) }.to_msgpack)
       end
       sleep 0.5
     end
@@ -63,7 +63,7 @@ class InAESForwardTest < Test::Unit::TestCase
 
     d.run do
       d.expected_emits.each do |tag, time, record|
-        send_data [tag, time, record].map { |x| encrypt_data(x) }.to_msgpack
+        send_data([tag, time, record].map { |x| return encrypt_data(x) }.to_msgpack)
       end
       sleep 0.5
     end
@@ -81,8 +81,9 @@ class InAESForwardTest < Test::Unit::TestCase
       entries = []
       d.expected_emits.each do |tag, time, record|
         entries << [time, record]
+        p entries
       end
-      send_data ["tag1", entries].map { |x| encrypt_data(x) }.to_msgpack
+      send_data(["tag1", entries].map { |x| return encrypt_data(x) }.to_msgpack) 
       sleep 0.5
     end
   end
@@ -100,7 +101,7 @@ class InAESForwardTest < Test::Unit::TestCase
       d.expected_emits.each do |tag, time, record|
         [time, record].to_msgpack(entries)
       end
-      send_data ["tag1", entries].map { |x| encrypt_data(x) }.to_msgpack
+      send_data(["tag1", entries].map { |x| return encrypt_data(x) }.to_msgpack)
       sleep 0.5
     end
   end
@@ -115,7 +116,7 @@ class InAESForwardTest < Test::Unit::TestCase
 
     d.run do
       d.expected_emits.each do |tag, time, record|
-        send_data [tag, time, record].map { |x| encrypt_data(x) }.to_json
+        send_data([tag, time, record].map { |x| return encrypt_data(x) }.to_json)
       end
       sleep 0.5
     end
