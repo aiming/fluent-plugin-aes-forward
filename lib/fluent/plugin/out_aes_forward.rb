@@ -49,8 +49,6 @@ module Fluent
         # writeRaw(tag)
         sock.write tag.to_msgpack  # tag
 
-        chunk.encrypt!(@key, @iv)
-
         # beginRaw(size)
         sz = chunk.size
         #if sz < 32
