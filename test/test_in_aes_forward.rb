@@ -8,6 +8,7 @@ class InAESForwardTest < Test::Unit::TestCase
   PORT = unused_port
   KEY = "hogehogehogehogehogehogehogehoge"
   IV = "mogemogemogemogemogemogemogemoge"
+
   CONFIG = %[
     key  #{KEY}
     iv   #{IV}
@@ -81,7 +82,6 @@ class InAESForwardTest < Test::Unit::TestCase
       entries = []
       d.expected_emits.each do |tag, time, record|
         entries << [time, record]
-        p entries
       end
       send_data(["tag1", entries].map { |x| return encrypt_data(x) }.to_msgpack) 
       sleep 0.5

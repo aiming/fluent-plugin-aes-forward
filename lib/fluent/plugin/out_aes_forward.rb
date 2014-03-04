@@ -1,17 +1,30 @@
 require "fluent/plugin/out_forward"
 require "fluent/plugin/buf_memory"
+require "fluent/plugin/buf_file"
 require "base64"
 require "openssl"
 
 module Fluent
 
+  def encrypt(key, iv, data)
+    cipher = OpenSSL::Cipher::AES.new(256, :CBC).encrypt
+    cipher.key = key
+    cipher.iv = iv
+    cipher.encrypt
+    Base64.encode64(cipher.update(data) + cipher.final)
+  end
+
   MemoryBufferChunk.class_eval do
-    def encrypt!(key, iv)
-      cipher = OpenSSL::Cipher::AES.new(256, :CBC).encrypt
-      cipher.key = key
-      cipher.iv = iv
-      cipher.encrypt
-      @data = Base64.encode64(cipher.update(@data) + cipher.final)
+    def write_to(io)
+      io.write(encrypt(@data))
+    end
+  end
+
+  FileBufferChunk.class_eval do
+    def write_to(io)
+      open {|i|
+        FileUtils.copy_stream(encrypt(i), io)
+      }
     end
   end
 

@@ -5,14 +5,19 @@ class AESForwardOutputTest < Test::Unit::TestCase
     Fluent::Test.setup
   end
 
+  KEY = "hogehogehogehogehogehogehogehoge"
+  IV = "mogemogemogemogemogemogemogemoge"
+  PORT = "13999"
+
   CONFIG = %[
     send_timeout 51
-    key  hogehogehogehogehogehogehogehoge
-    iv   mogemogemogemogemogemogemogemoge
+    key  #{KEY}
+    iv   #{IV}
+
     <server>
       name test
       host 127.0.0.1
-      port 13999
+      port #{PORT}
     </server>
   ]
 
@@ -23,7 +28,7 @@ class AESForwardOutputTest < Test::Unit::TestCase
       end
     end.configure(conf)
   end
-  
+
   def test_configure
     d = create_driver
     nodes = d.instance.nodes
@@ -40,6 +45,5 @@ class AESForwardOutputTest < Test::Unit::TestCase
     d = create_driver(CONFIG + "\nheartbeat_type tcp")
     assert_equal :tcp, d.instance.heartbeat_type
   end
-
 
 end
